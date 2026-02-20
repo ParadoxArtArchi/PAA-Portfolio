@@ -3,341 +3,262 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PAA – Paradox Art / Architecture</title>
 
-<title>PAA — Paradox Art / Architecture</title>
-
-<!-- Google Font -->
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 
-/* ============================= */
-/* RESET                         */
-/* ============================= */
+/* ================= GLOBAL ================= */
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+font-family:'Manrope',sans-serif;
+background:#fff;
+color:#111;
+line-height:1.7;
 }
 
-body {
-    font-family: 'Manrope', sans-serif;
-    background: #ffffff;
-    color: #111;
-    line-height: 1.7;
-    overflow-x: hidden;
+.section{
+border:1px solid rgba(0,0,0,0.06);
+margin:60px;
+padding:80px 60px;
+position:relative;
 }
 
-img {
-    max-width: 100%;
-    display: block;
+h1,h2,h3{font-weight:400;}
+
+/* ================= HEADER ================= */
+
+header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:30px 60px;
+border-bottom:1px solid rgba(0,0,0,0.06);
 }
 
-/* ============================= */
-/* GLOBAL STRUCTURE              */
-/* ============================= */
-
-.container {
-    width: 90%;
-    max-width: 1400px;
-    margin: auto;
+.logo img{
+height:40px;
+object-fit:contain;
 }
 
-.section {
-    padding: 160px 0;
-    position: relative;
+/* 3 DOT MENU */
+
+.menu-trigger{
+cursor:pointer;
+display:flex;
+gap:6px;
 }
 
-.thin-line {
-    width: 60px;
-    height: 1px;
-    background: rgba(0,0,0,0.15);
-    margin: 30px auto 0;
+.menu-trigger span{
+width:6px;
+height:6px;
+background:#111;
+border-radius:50%;
 }
 
-/* ============================= */
-/* NAVIGATION                    */
-/* ============================= */
+/* FULLSCREEN MENU */
 
-nav {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    padding: 28px 0;
-    background: rgba(255,255,255,0.9);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid rgba(0,0,0,0.06);
-    z-index: 1000;
+.fullscreen-menu{
+position:fixed;
+inset:0;
+background:#111;
+color:#fff;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+transform:translateX(-100%);
+transition:0.6s cubic-bezier(.77,0,.18,1);
+z-index:999;
 }
 
-.nav-inner {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.fullscreen-menu.active{
+transform:translateX(0);
 }
 
-.logo-text {
-    font-weight: 600;
-    letter-spacing: 4px;
-    font-size: 14px;
+.fullscreen-menu a{
+color:#fff;
+font-size:28px;
+text-decoration:none;
+margin:20px 0;
+letter-spacing:3px;
 }
 
-nav ul {
-    list-style: none;
-    display: flex;
-    gap: 50px;
+.close-menu{
+position:absolute;
+top:40px;
+right:60px;
+font-size:30px;
+cursor:pointer;
 }
 
-nav a {
-    text-decoration: none;
-    color: #111;
-    font-weight: 400;
-    font-size: 14px;
-    letter-spacing: 1px;
-    position: relative;
+/* ================= BANNER ================= */
+
+.banner{
+margin:60px;
+border:1px solid rgba(0,0,0,0.06);
+padding:40px;
+text-align:center;
 }
 
-nav a::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -6px;
-    width: 0;
-    height: 1px;
-    background: #111;
-    transition: 0.4s ease;
+.banner img{
+width:100%;
+height:420px;
+object-fit:contain;
+background:#f5f5f5;
 }
 
-nav a:hover::after {
-    width: 100%;
+.banner h1{
+margin-top:30px;
+font-size:32px;
+letter-spacing:4px;
 }
 
-/* ============================= */
-/* HERO                          */
-/* ============================= */
-
-.hero {
-    height: 100vh;
-    background: url('https://i.postimg.cc/23NbWwrZ/image-1771554311343516.png') center/cover no-repeat;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    position: relative;
+.banner p{
+max-width:600px;
+margin:20px auto 0;
+color:#555;
 }
 
-.hero::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.35), rgba(0,0,0,0.45));
+/* ================= BUTTONS ================= */
+
+.btn{
+display:inline-block;
+padding:14px 36px;
+border:1px solid #000;
+background:#000;
+color:#fff;
+text-decoration:none;
+letter-spacing:2px;
+margin:40px 10px 0;
+transition:0.4s;
 }
 
-.hero-content {
-    position: relative;
-    color: white;
-    max-width: 900px;
-    padding: 0 20px;
-    animation: fadeUp 1.2s ease forwards;
-    opacity: 0;
+.btn:hover{
+background:#fff;
+color:#000;
 }
 
-.hero h1 {
-    font-size: clamp(28px, 5vw, 54px);
-    font-weight: 300;
-    letter-spacing: 6px;
-    text-transform: uppercase;
+/* ================= SERVICES ================= */
+
+.services-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:50px;
+margin-top:60px;
 }
 
-.hero p {
-    margin-top: 40px;
-    font-weight: 300;
-    font-size: 18px;
-    opacity: 0.85;
+.service{
+border:1px solid rgba(0,0,0,0.06);
+padding:20px;
+transition:0.4s;
 }
 
-.hero-buttons {
-    margin-top: 60px;
-    display: flex;
-    justify-content: center;
-    gap: 30px;
+.service:hover{
+transform:translateY(-8px);
 }
 
-/* ============================= */
-/* BUTTONS                       */
-/* ============================= */
-
-.btn-primary {
-    padding: 14px 36px;
-    background: white;
-    color: black;
-    text-decoration: none;
-    font-size: 13px;
-    letter-spacing: 2px;
-    border: 1px solid white;
-    transition: all 0.4s ease;
+.service img{
+width:100%;
+height:200px;
+object-fit:cover;
+border-radius:8px;
 }
 
-.btn-primary:hover {
-    background: transparent;
-    color: white;
+.service h3{
+margin:20px 0 10px;
+font-size:18px;
 }
 
-.btn-outline {
-    padding: 14px 36px;
-    border: 1px solid rgba(255,255,255,0.6);
-    text-decoration: none;
-    color: white;
-    font-size: 13px;
-    letter-spacing: 2px;
-    transition: all 0.4s ease;
+.service p{
+color:#555;
+font-size:14px;
 }
 
-.btn-outline:hover {
-    background: white;
-    color: black;
+.service .btn{
+margin-top:20px;
 }
 
-/* ============================= */
-/* DEVICE SECTION                */
-/* ============================= */
+/* ================= POPUP ================= */
 
-#device {
-    background: #fff;
-    text-align: center;
+.popup{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,0.8);
+display:none;
+justify-content:center;
+align-items:center;
+z-index:1000;
 }
 
-#device h2 {
-    font-weight: 300;
-    font-size: 32px;
-    letter-spacing: 4px;
-    text-transform: uppercase;
+.popup-content{
+background:#fff;
+padding:40px;
+max-width:700px;
+width:90%;
+border-radius:10px;
+text-align:center;
+position:relative;
 }
 
-.device-grid {
-    margin-top: 100px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 60px;
+.popup-content img{
+width:100%;
+margin-bottom:20px;
+border-radius:8px;
 }
 
-.device-item {
-    overflow: hidden;
-    border: 1px solid rgba(0,0,0,0.06);
-    transition: transform 0.6s ease;
+.popup-close{
+position:absolute;
+top:20px;
+right:20px;
+font-size:22px;
+cursor:pointer;
 }
 
-.device-item img {
-    transition: transform 0.8s ease;
+/* ================= PORTFOLIO IMAGE ================= */
+
+.portfolio-full{
+margin:60px;
 }
 
-.device-item:hover img {
-    transform: scale(1.05);
+.portfolio-full img{
+width:100%;
+border-radius:20px;
 }
 
-/* ============================= */
-/* ABOUT SECTION                 */
-/* ============================= */
+/* ================= FOOTER ================= */
 
-#about {
-    background: #f8f8f8;
-    text-align: center;
+footer{
+background:#f2f2f2;
+padding:40px 60px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-top:60px;
 }
 
-#about h2 {
-    font-weight: 300;
-    font-size: 30px;
-    letter-spacing: 3px;
+footer img{
+height:40px;
 }
 
-#about p {
-    max-width: 700px;
-    margin: 40px auto 0;
-    color: #555;
+footer p{
+color:#555;
 }
 
-/* ============================= */
-/* FOOTER                        */
-/* ============================= */
+/* ================= RESPONSIVE ================= */
 
-footer {
-    padding: 60px 0;
-    border-top: 1px solid rgba(0,0,0,0.06);
-    background: #fff;
-}
+@media(max-width:768px){
 
-.footer-inner {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+.section{margin:20px;padding:40px;}
 
-.footer-left {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
+header{padding:20px;}
 
-.dots {
-    display: flex;
-    gap: 6px;
-}
+.banner img{height:250px;}
 
-.dots span {
-    width: 6px;
-    height: 6px;
-    background: #111;
-    border-radius: 50%;
-}
-
-.contact-icon {
-    font-size: 14px;
-    letter-spacing: 2px;
-}
-
-.footer-right img {
-    height: 40px;
-    object-fit: contain;
-}
-
-/* ============================= */
-/* ANIMATION                     */
-/* ============================= */
-
-@keyframes fadeUp {
-    from {
-        opacity: 0;
-        transform: translateY(40px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* ============================= */
-/* RESPONSIVE                    */
-/* ============================= */
-
-@media(max-width: 768px) {
-
-    nav ul {
-        gap: 20px;
-    }
-
-    .hero-buttons {
-        flex-direction: column;
-    }
-
-    .section {
-        padding: 120px 0;
-    }
-
-    .footer-inner {
-        flex-direction: column;
-        gap: 30px;
-    }
+footer{flex-direction:column;gap:20px;text-align:center;}
 
 }
 
@@ -346,80 +267,110 @@ footer {
 
 <body>
 
-<!-- NAV -->
-<nav>
-<div class="container nav-inner">
-    <div class="logo-text">PAA</div>
-    <ul>
-        <li><a href="#device">Projects</a></li>
-        <li><a href="#about">Studio</a></li>
-        <li><a href="#">Contact</a></li>
-    </ul>
+<!-- HEADER -->
+<header>
+<div class="menu-trigger" onclick="openMenu()">
+<span></span><span></span><span></span>
 </div>
-</nav>
 
-<!-- HERO -->
-<section class="hero">
-    <div class="hero-content">
-        <h1>Paradox Art / Architecture</h1>
-        <div class="thin-line"></div>
-        <p>Architecture contemporaine, design minimal et expériences spatiales immersives. Chaque projet est pensé comme une œuvre.</p>
-        <div class="hero-buttons">
-            <a href="#device" class="btn-primary">Portfolio</a>
-            <a href="#" class="btn-outline">Contact</a>
-        </div>
-    </div>
-</section>
+<div class="logo">
+<img src="https://i.postimg.cc/TP0VXZG5/file-000000005a4c71f58dde95a182f1aad7.png">
+</div>
+</header>
 
-<!-- DEVICE SECTION -->
-<section id="device" class="section">
-<div class="container">
-    <h2>Device</h2>
-    <div class="thin-line"></div>
+<!-- FULLSCREEN MENU -->
+<div class="fullscreen-menu" id="menu">
+<div class="close-menu" onclick="closeMenu()">✕</div>
+<a href="#">Portfolio</a>
+<a href="#">À propos</a>
+<a href="#">Contact</a>
+</div>
 
-    <div class="device-grid">
-        <div class="device-item">
-            <img src="https://via.placeholder.com/800x600" alt="">
-        </div>
-        <div class="device-item">
-            <img src="https://via.placeholder.com/800x600" alt="">
-        </div>
-        <div class="device-item">
-            <img src="https://via.placeholder.com/800x600" alt="">
-        </div>
-    </div>
+<!-- BANNER -->
+<section class="banner">
+<img src="https://i.postimg.cc/23NbWwrZ/image-1771554311343516.png">
+<h1>Paradox Art / Architecture</h1>
+<p>Studio d’architecture contemporaine spécialisé dans la conception d’espaces minimalistes, précis et intemporels.</p>
+
+<div>
+<a href="#services" class="btn">Portfolio</a>
+<a href="#" class="btn">Contact</a>
 </div>
 </section>
 
-<!-- ABOUT -->
-<section id="about" class="section">
-<div class="container">
-    <h2>Studio</h2>
-    <div class="thin-line"></div>
-    <p>
-        Paradox Art / Architecture développe des espaces où minimalisme, lumière et matière dialoguent avec précision.
-        Chaque détail est pensé comme un élément structurant, révélant une esthétique sobre et intemporelle.
-    </p>
+<!-- SERVICES -->
+<section class="section" id="services">
+<h2>Services</h2>
+
+<div class="services-grid">
+
+<div class="service">
+<img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e">
+<h3>Architecture & Plans</h3>
+<p>Plans 2D, façades et concept architectural complet.</p>
+<a class="btn" onclick="openPopup()">Consulter</a>
+</div>
+
+<div class="service">
+<img src="https://images.unsplash.com/photo-1492724441997-5dc865305da7">
+<h3>Design d’Intérieur</h3>
+<p>Rendus photoréalistes et optimisation d’espace.</p>
+<a class="btn" onclick="openPopup()">Consulter</a>
+</div>
+
+<div class="service">
+<img src="https://images.unsplash.com/photo-1493666438817-866a91353ca9">
+<h3>Mobilier Sur Mesure</h3>
+<p>Conception de cuisines, bureaux et dressings personnalisés.</p>
+<a class="btn" onclick="openPopup()">Consulter</a>
+</div>
+
+<div class="service">
+<img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511">
+<h3>Visites Immersives 360°</h3>
+<p>Expériences interactives pour investisseurs et particuliers.</p>
+<a class="btn" onclick="openPopup()">Consulter</a>
+</div>
+
 </div>
 </section>
+
+<!-- PORTFOLIO IMAGE -->
+<div class="portfolio-full">
+<img src="https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d">
+</div>
+
+<!-- POPUP -->
+<div class="popup" id="popup">
+<div class="popup-content">
+<div class="popup-close" onclick="closePopup()">✕</div>
+<img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e">
+<h3>Projet Architectural</h3>
+<p>Description détaillée du projet, approche conceptuelle, matériaux utilisés et vision artistique.</p>
+<a class="btn" onclick="closePopup()">Retour</a>
+</div>
+</div>
 
 <!-- FOOTER -->
 <footer>
-<div class="container footer-inner">
-    <div class="footer-left">
-        <div class="dots">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-        <div class="contact-icon">CONTACT</div>
-    </div>
-
-    <div class="footer-right">
-        <img src="https://i.postimg.cc/TP0VXZG5/file-000000005a4c71f58dde95a182f1aad7.png" alt="PAA Logo">
-    </div>
-</div>
+<p>contact@paradox-architecture.com</p>
+<img src="https://i.postimg.cc/TP0VXZG5/file-000000005a4c71f58dde95a182f1aad7.png">
 </footer>
+
+<script>
+function openMenu(){
+document.getElementById('menu').classList.add('active');
+}
+function closeMenu(){
+document.getElementById('menu').classList.remove('active');
+}
+function openPopup(){
+document.getElementById('popup').style.display='flex';
+}
+function closePopup(){
+document.getElementById('popup').style.display='none';
+}
+</script>
 
 </body>
 </html>
