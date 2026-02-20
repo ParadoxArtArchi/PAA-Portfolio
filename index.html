@@ -19,25 +19,30 @@ nav h1 { font-weight:700; letter-spacing:4px; }
 nav a { text-decoration:none; color:#111; margin-left:30px; font-weight:500; transition:0.3s; }
 nav a:hover { color:#0a8d5e; }
 
-/* ===== Hero Section ===== */
-.hero {
-  height:100vh; display:flex; flex-direction:column; justify-content:center;
-  align-items:flex-start; padding-left:80px; position:relative; 
-  border-bottom:1px solid rgba(0,0,0,0.05);
-
-  /* BANNIÈRE */
-  background-image: url('https://i.postimg.cc/J0m18dqn/file-00000000214071fdb43e386738f135a8.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+/* ===== Hero Image ===== */
+.hero-image img {
+  width:100%;
+  height:auto;
+  display:block;
 }
-.hero h2 { font-size:60px; font-weight:700; margin-bottom:20px; border-left:2px solid rgba(0,0,0,0.1); padding-left:20px; color:#fff; text-shadow: 1px 1px 5px rgba(0,0,0,0.6); }
-.hero p { font-size:18px; max-width:600px; margin-bottom:40px; border-left:1px solid rgba(255,255,255,0.3); padding-left:20px; color:#fff; text-shadow: 1px 1px 4px rgba(0,0,0,0.5); }
-.hero .buttons { display:flex; gap:20px; }
+
+/* ===== Hero Text ===== */
+.hero-text {
+  padding:80px 80px 40px 80px;
+}
+.hero-text h2 { 
+  font-size:60px; font-weight:700; margin-bottom:20px; 
+  border-left:2px solid rgba(0,0,0,0.1); padding-left:20px; 
+}
+.hero-text p { 
+  font-size:18px; max-width:600px; margin-bottom:40px; 
+  border-left:1px solid rgba(0,0,0,0.05); padding-left:20px; 
+}
+.hero-text .buttons { display:flex; gap:20px; }
 
 /* ===== Buttons ===== */
 .btn {
-  padding:14px 28px; border:2px solid #fff; background:transparent; color:#fff; text-decoration:none;
+  padding:14px 28px; border:2px solid #111; background:transparent; color:#111; text-decoration:none;
   font-weight:600; transition:0.4s; position:relative; overflow:hidden;
 }
 .btn::after {
@@ -75,8 +80,8 @@ footer { padding:60px 80px; border-top:1px solid rgba(0,0,0,0.05); text-align:ce
 
 /* ===== Responsive ===== */
 @media(max-width:768px){
-  .hero h2 { font-size:42px; }
-  .hero p { font-size:16px; }
+  .hero-text h2 { font-size:42px; }
+  .hero-text p { font-size:16px; }
   nav { padding:15px 30px; }
   section.services { flex-direction:column; gap:30px; padding:50px 20px; }
 }
@@ -94,8 +99,13 @@ footer { padding:60px 80px; border-top:1px solid rgba(0,0,0,0.05); text-align:ce
   </div>
 </nav>
 
-<!-- HERO -->
-<section class="hero">
+<!-- BANNIÈRE IMAGE COMPLETE -->
+<section class="hero-image">
+  <img src="https://i.postimg.cc/J0m18dqn/file-00000000214071fdb43e386738f135a8.png" alt="Bannière PAA">
+</section>
+
+<!-- TEXTE HERO APRÈS BANNIÈRE -->
+<section class="hero-text">
   <h2>Paradox Art / Architecture</h2>
   <p>Architecture moderne, design minimaliste et expériences immersives 3D. Découvrez des espaces uniques, conçus pour inspirer.</p>
   <div class="buttons">
