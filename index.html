@@ -107,14 +107,15 @@ object-fit:contain;
 position:fixed;
 top:0;
 left:-100%;
-width:80%;
+width:100%;
 height:100%;
-background:#111;
+background:#0a0a0a;
 color:#fff;
 display:flex;
-align-items:center;
+flex-direction:column;
 justify-content:center;
-transition:0.7s cubic-bezier(.77,0,.18,1);
+padding:80px;
+transition:0.8s cubic-bezier(.77,0,.18,1);
 z-index:2000;
 }
 
@@ -122,12 +123,63 @@ z-index:2000;
 left:0;
 }
 
+.menu-inner{
+display:flex;
+flex-direction:column;
+gap:40px;
+}
+
+.menu-inner a{
+color:#fff;
+text-decoration:none;
+font-size:clamp(32px,6vw,72px);
+font-weight:300;
+letter-spacing:4px;
+text-transform:uppercase;
+position:relative;
+transition:0.4s ease;
+}
+
+.menu-inner a::after{
+content:"";
+position:absolute;
+left:0;
+bottom:-10px;
+width:0;
+height:1px;
+background:#fff;
+transition:0.4s ease;
+}
+
+.menu-inner a:hover{
+opacity:0.6;
+}
+
+.menu-inner a:hover::after{
+width:120px;
+}
+
 .menu-close{
 position:absolute;
-top:30px;
-right:30px;
-font-size:24px;
+top:40px;
+right:60px;
+font-size:22px;
 cursor:pointer;
+opacity:0.6;
+transition:0.3s;
+}
+
+.menu-close:hover{
+opacity:1;
+}
+
+.menu-footer{
+position:absolute;
+bottom:40px;
+left:80px;
+font-size:12px;
+letter-spacing:2px;
+opacity:0.4;
 }
 
 /* ========================= */
@@ -396,11 +448,17 @@ height:40px;
 
 <div class="overlay" id="menuOverlay">
 <div class="menu-close" onclick="toggleMenu()">✕</div>
-<ul>
-<li>Portfolio</li>
-<li>À propos</li>
-<li>Contact</li>
-</ul>
+
+<div class="menu-inner">
+<a href="#">Portfolio</a>
+<a href="#">À propos</a>
+<a href="#">Contact</a>
+</div>
+
+<div class="menu-footer">
+Paradox Art / Architecture
+</div>
+
 </div>
 
 <section class="hero">
