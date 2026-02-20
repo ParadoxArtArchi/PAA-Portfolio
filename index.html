@@ -66,8 +66,8 @@ header{
 position:fixed;
 top:0;
 width:100%;
-padding:30px 0;
-background:rgba(255,255,255,0.9);
+padding:15px 0; /* réduit */
+background:rgba(255,255,255,0.85);
 backdrop-filter:blur(8px);
 border-bottom:1px solid rgba(0,0,0,0.06);
 z-index:1000;
@@ -107,7 +107,7 @@ object-fit:contain;
 position:fixed;
 top:0;
 left:-100%;
-width:100%;
+width:80%;
 height:100%;
 background:#111;
 color:#fff;
@@ -122,15 +122,11 @@ z-index:2000;
 left:0;
 }
 
-.overlay ul{
-list-style:none;
-text-align:center;
-}
-
-.overlay li{
-margin:30px 0;
-font-size:28px;
-letter-spacing:4px;
+.menu-close{
+position:absolute;
+top:30px;
+right:30px;
+font-size:24px;
 cursor:pointer;
 }
 
@@ -139,16 +135,17 @@ cursor:pointer;
 /* ========================= */
 
 .hero{
-margin-top:120px;
-height:65vh;
+height:80vh;
+min-height:500px;
+width:100%;
 background:url('https://i.postimg.cc/23NbWwrZ/image-1771554311343516.png') center/cover no-repeat;
 display:flex;
 align-items:center;
 justify-content:center;
 text-align:center;
 position:relative;
-border-radius:20px;
 overflow:hidden;
+border-radius:0;
 }
 
 .hero::before{
@@ -313,8 +310,7 @@ height:40px;
 
 @media(max-width:768px){
 .section{padding:80px 30px}
-.hero{height:50vh}
-.button-row{flex-direction:column}
+.hero{height:70vh}
 }
 
 </style>
@@ -333,14 +329,13 @@ height:40px;
 </header>
 
 <div class="overlay" id="menuOverlay">
+<div class="menu-close" onclick="toggleMenu()">✕</div>
 <ul>
 <li>Portfolio</li>
 <li>À propos</li>
 <li>Contact</li>
 </ul>
 </div>
-
-<div class="container">
 
 <section class="hero">
 <div class="hero-content">
@@ -427,4 +422,4 @@ document.getElementById("popup").style.display="none";
 </script>
 
 </body>
-  </html>
+</html>
