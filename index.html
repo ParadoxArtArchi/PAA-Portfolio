@@ -136,7 +136,8 @@ cursor:pointer;
 
 .hero{
 height:80vh;
-min-height:500px;
+max-height:750px;   /* plafond strict */
+min-height:450px;   /* plancher minimum */
 width:100%;
 background:url('https://i.postimg.cc/23NbWwrZ/image-1771554311343516.png') center/cover no-repeat;
 display:flex;
@@ -310,7 +311,7 @@ height:40px;
 
 @media(max-width:768px){
 .section{padding:80px 30px}
-.hero{height:70vh}
+.hero{height:60vh}
 }
 
 </style>
@@ -414,6 +415,15 @@ function toggleMenu(){
 document.getElementById("menuOverlay").classList.toggle("active");
 }
 function openPopup(){
+document.getElementById("popup").style.display="flex";
+}
+function closePopup(){
+document.getElementById("popup").style.display="none";
+}
+</script>
+
+</body>
+</html>function openPopup(){
 document.getElementById("popup").style.display="flex";
 }
 function closePopup(){
