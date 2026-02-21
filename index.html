@@ -37,7 +37,8 @@ margin:auto;
 .section{
 padding:120px 60px;
 margin:120px auto;
-border:1px solid rgba(0,0,0,0.20);
+border:1px solid rgba(0,0,0,0.2);
+box-shadow:0 10px 30px rgba(0,0,0,0.15);
 border-radius:18px;
 position:relative;
 background:#fff;
@@ -307,55 +308,77 @@ border-radius:10px;
 .popup{
 position:fixed;
 inset:0;
-background:rgba(0,0,0,0.7);
-display:none;
+background:rgba(0,0,0,0.75);
+display:flex;
 align-items:center;
 justify-content:center;
 z-index:3000;
+
+/* Animation base */
+opacity:0;
+visibility:hidden;
+transition:opacity 0.8s ease, visibility 0.8s ease;
 }
 
+/* Etat actif */
+.popup.active{
+opacity:1;
+visibility:visible;
+}
+
+/* Contenu */
 .popup-content{
 background:#fff;
-width:80%;
+width:90%;
 max-width:900px;
-padding:50px;
-border-radius:20px;
-position:relative;
-}
-
-.popup-close{
-position:absolute;
-top:20px;
-right:20px;
-cursor:pointer;
-font-size:18px;
-}
-
-  .popup-content{
-background:#fff;
-width:80%;
-max-width:900px;
-padding:50px;
-border-radius:20px;
+padding:60px;
+border-radius:24px;
 position:relative;
 
 max-height:85vh;
 overflow-y:auto;
+
+/* Animation */
+transform:translateY(120px);
+opacity:0;
+transition:transform 1.2s cubic-bezier(.19,1,.22,1), opacity 1.2s ease;
 }
 
+/* Quand popup active */
+.popup.active .popup-content{
+transform:translateY(0);
+opacity:1;
+}
+
+/* Bouton fermeture */
+.popup-close{
+position:absolute;
+top:25px;
+right:30px;
+cursor:pointer;
+font-size:18px;
+opacity:0.6;
+transition:0.3s ease;
+}
+
+.popup-close:hover{
+opacity:1;
+}
+
+/* Typographie */
 .popup-title{
-font-size:26px;
-letter-spacing:3px;
+font-size:28px;
+letter-spacing:4px;
 font-weight:300;
 margin-bottom:20px;
 text-transform:uppercase;
 }
 
 .popup-subtitle{
-font-size:14px;
+font-size:13px;
 letter-spacing:2px;
-color:#888;
-margin-bottom:40px;
+color:#777;
+margin-bottom:50px;
 }
 
 .popup-project{
@@ -366,31 +389,32 @@ padding-bottom:40px;
 
 .popup-project h4{
 font-weight:500;
-margin-bottom:15px;
+margin-bottom:20px;
 }
 
 .popup-gallery{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-gap:20px;
-margin:20px 0;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:25px;
+margin:25px 0;
 }
 
 .popup-gallery img{
-border-radius:12px;
+border-radius:14px;
 }
 
 .popup-description{
 font-size:14px;
 color:#444;
-max-width:700px;
+max-width:720px;
+line-height:1.8;
 }
 
 .popup-360{
-margin-top:20px;
-padding:30px;
-background:#f5f5f5;
-border-radius:12px;
+margin-top:25px;
+padding:40px;
+background:#f3f3f3;
+border-radius:14px;
 text-align:center;
 font-size:13px;
 letter-spacing:1px;
@@ -409,49 +433,218 @@ box-shadow:0 20px 40px rgba(0,0,0,0.08);
 }
 
 /* ========================= */
-/* FOOTER                    */
+/* FOOTER IMPACT ZONE        */
+/* ========================= */
+
+
+.footer-impact{
+display:flex;
+width:100%;
+height:280px;
+}
+
+/* Bloc noir */
+.footer-left{
+width:50%;
+background:#0a0a0a;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+.footer-left h2{
+color:#ffffff;
+font-size:clamp(50px,8vw,140px);
+font-weight:800;
+letter-spacing:8px;
+}
+
+/* Bloc blanc */
+.footer-right{
+width:50%;
+background:#ffffff;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+.footer-right h2{
+color:#0a0a0a;
+font-size:clamp(50px,8vw,140px);
+font-weight:300;
+letter-spacing:8px;
+}
+
+
+/* ========================= */
+/* FOOTER BAS                */
 /* ========================= */
 
 footer{
-background:#f2f2f2;
-padding:60px 0;
-margin-top:120px;
+background:#0a0a0a;
+color:#ffffff;
+padding:60px;
 }
 
 .footer-inner{
 display:flex;
 justify-content:space-between;
 align-items:center;
+max-width:1400px;
+margin:auto;
 flex-wrap:wrap;
+gap:20px;
 }
 
 .footer-email{
 font-size:14px;
-letter-spacing:1px;
+letter-spacing:2px;
+opacity:0.7;
 }
 
 .footer-logo img{
-height:40px;
+height:50px;
+filter:invert(1);
+opacity:0.9;
 }
 
-@media(max-width:768px){
-.section{padding:80px 30px}
-.hero{height:60vh}
+
+/* ========================= */
+/* FOOTER INFO BAR           */
+/* ========================= */
+
+footer{
+background:#0a0a0a;
+color:#ffffff;
+padding:60px;
 }
+
+.footer-inner{
+display:flex;
+justify-content:space-between;
+align-items:center;
+max-width:1400px;
+margin:auto;
+flex-wrap:wrap;
+gap:20px;
+}
+
+.footer-email{
+font-size:14px;
+letter-spacing:2px;
+opacity:0.7;
+}
+
+.footer-logo img{
+height:50px;
+filter:invert(1);
+opacity:0.9;
+}
+
+
+/* ========================= */
+/* RESPONSIVE                */
+/* ========================= */
+
+@media(max-width:768px){
+
+.footer-impact{
+flex-direction:row; /* IMPORTANT : reste sur la même ligne */
+height:220px;
+}
+
+.footer-left h2,
+.footer-right h2{
+font-size:40px;
+}
+
+}
+
+
+/* ========================= */
+/* RESPONSIVE                */
+/* ========================= */
+
+@media(max-width:768px){
+
+.footer-impact{
+flex-direction:column;
+height:auto;
+}
+
+.footer-impact-left,
+.footer-impact-right{
+height:200px;
+}
+
+}
+
+
+/* ========================= */
+/* FOOTER BASE               */
+/* ========================= */
+
+footer{
+background:#0a0a0a;
+color:#ffffff;
+padding:200px 60px 80px; /* grand padding haut pour respirer */
+position:relative;
+z-index:1;
+}
+
+.footer-inner{
+display:flex;
+justify-content:space-between;
+align-items:flex-end;
+flex-wrap:wrap;
+gap:40px;
+max-width:1400px;
+margin:auto;
+}
+
+.footer-email{
+font-size:14px;
+letter-spacing:2px;
+opacity:0.7;
+}
+
+.footer-logo img{
+height:50px;
+filter:invert(1);
+opacity:0.9;
+}
+
+
+/* ========================= */
+/* RESPONSIVE                */
+/* ========================= */
+
+@media(max-width:768px){
+
+.footer-impact-inner{
+flex-direction:column;
+gap:10px;
+}
+
+footer{
+padding:160px 30px 60px;
+}
+
+.section{
+padding:80px 30px;
+}
+
+.hero{
+height:60vh;
+}
+
+}
+
 
 </style>
 </head>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-</script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-
-</body>
-</html>
-
 <body>
+  
 
 <header>
 <div class="container header-inner">
@@ -528,10 +721,17 @@ Paradox Art / Architecture
 </div>
 </section>
 
-</div>
-
 <div class="portfolio-image">
 <img src="https://picsum.photos/1400/800?random=9">
+</div>
+
+<div class="footer-impact">
+  <div class="footer-left">
+    <h2>PAA</h2>
+  </div>
+  <div class="footer-right">
+    <h2>PORTFOLIO</h2>
+  </div>
 </div>
 
 <footer>
@@ -551,123 +751,121 @@ Paradox Art / Architecture
 
 </div>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
 
 <script>
 gsap.registerPlugin(ScrollTrigger);
+
 function toggleMenu(){
-document.getElementById("menuOverlay").classList.toggle("active");
+  document.getElementById("menuOverlay").classList.toggle("active");
 }
+
+/* ========================= */
+/* OPEN POPUP */
+/* ========================= */
 
 function openPopup(type){
 
-let content = "";
+  let content = "";
 
-if(type === "architecture"){
-content = `
-<div class="popup-title">Architecture & Plans</div>
-<div class="popup-subtitle">Conception architecturale contemporaine</div>
+  if(type === "architecture"){
+    content = `
+    <div class="popup-title">Architecture & Plans</div>
+    <div class="popup-subtitle">Conception architecturale contemporaine</div>
+    ${generateProjects("Projet Résidentiel Minimaliste")}
+    ${generateProjects("Villa Géométrique Moderne")}
+    ${generateProjects("Complexe Commercial Urbain")}
+    `;
+  }
 
-${generateProjects("Projet Résidentiel Minimaliste")}
-${generateProjects("Villa Géométrique Moderne")}
-${generateProjects("Complexe Commercial Urbain")}
-`;
+  if(type === "interior"){
+    content = `
+    <div class="popup-title">Design d’Intérieur</div>
+    <div class="popup-subtitle">Atmosphères & direction artistique spatiale</div>
+    ${generateProjects("Penthouse Contemporain")}
+    ${generateProjects("Espace Bureau Premium")}
+    ${generateProjects("Suite Hôtelière Élégante")}
+    `;
+  }
+
+  if(type === "furniture"){
+    content = `
+    <div class="popup-title">Mobilier Sur Mesure</div>
+    <div class="popup-subtitle">Création exclusive & optimisation fonctionnelle</div>
+    ${generateProjects("Cuisine Minimal Luxe")}
+    ${generateProjects("Dressing Architectural")}
+    ${generateProjects("Bureau Sculptural")}
+    `;
+  }
+
+  if(type === "immersive"){
+    content = `
+    <div class="popup-title">Visites Immersives 360°</div>
+    <div class="popup-subtitle">Expérience interactive — Lumion + Pano2VR</div>
+
+    <div class="popup-project">
+      <h4>Projet Villa 360°</h4>
+      <div class="popup-360">
+      Zone prête pour intégration immersive
+      </div>
+    </div>
+    `;
+  }
+
+  document.getElementById("popup-dynamic-content").innerHTML = content;
+  document.getElementById("popup").classList.add("active");
 }
 
-if(type === "interior"){
-content = `
-<div class="popup-title">Design d’Intérieur</div>
-<div class="popup-subtitle">Atmosphères & direction artistique spatiale</div>
-
-${generateProjects("Penthouse Contemporain")}
-${generateProjects("Espace Bureau Premium")}
-${generateProjects("Suite Hôtelière Élégante")}
-`;
-}
-
-if(type === "furniture"){
-content = `
-<div class="popup-title">Mobilier Sur Mesure</div>
-<div class="popup-subtitle">Création exclusive & optimisation fonctionnelle</div>
-
-${generateProjects("Cuisine Minimal Luxe")}
-${generateProjects("Dressing Architectural")}
-${generateProjects("Bureau Sculptural")}
-`;
-}
-
-if(type === "immersive"){
-content = `
-<div class="popup-title">Visites Immersives 360°</div>
-<div class="popup-subtitle">Expérience interactive — Lumion + Pano2VR</div>
-
-<div class="popup-project">
-<h4>Projet Villa 360°</h4>
-<div class="popup-360">
-INTÉGRATION VISITE 360°<br><br>
-👉 Ici tu intègreras ton export Lumion<br>
-👉 Puis ton projet Pano2VR (iframe ou script embed)
-</div>
-</div>
-
-<div class="popup-project">
-<h4>Appartement 360°</h4>
-<div class="popup-360">
-Zone prête pour intégration immersive
-</div>
-</div>
-
-<div class="popup-project">
-<h4>Showroom 360°</h4>
-<div class="popup-360">
-Zone prête pour intégration immersive
-</div>
-</div>
-`;
-}
-
-document.getElementById("popup-dynamic-content").innerHTML = content;
-document.getElementById("popup").style.display="flex";
-}
+/* ========================= */
+/* CLOSE POPUP */
+/* ========================= */
 
 function closePopup(){
-document.getElementById("popup").style.display="none";
+  document.getElementById("popup").classList.remove("active");
 }
+
+/* ========================= */
+/* GENERATE PROJECTS */
+/* ========================= */
 
 function generateProjects(title){
-return `
-<div class="popup-project">
-<h4>${title}</h4>
+  return `
+  <div class="popup-project">
+    <h4>${title}</h4>
 
-<div class="popup-gallery">
-<img src="https://picsum.photos/400/300?random=${Math.random()}">
-<img src="https://picsum.photos/400/300?random=${Math.random()}">
-<img src="https://picsum.photos/400/300?random=${Math.random()}">
-</div>
+    <div class="popup-gallery">
+      <img src="https://picsum.photos/400/300?random=${Math.random()}">
+      <img src="https://picsum.photos/400/300?random=${Math.random()}">
+      <img src="https://picsum.photos/400/300?random=${Math.random()}">
+    </div>
 
-<div class="popup-description">
-Conception architecturale pensée autour de la lumière naturelle,
-de la matérialité et de la fluidité spatiale. 
-Approche minimaliste combinée à une identité forte et contemporaine.
-</div>
-
-</div>
-`;
+    <div class="popup-description">
+      Conception architecturale pensée autour de la lumière naturelle,
+      de la matérialité et de la fluidité spatiale.
+      Approche minimaliste combinée à une identité forte et contemporaine.
+    </div>
+  </div>
+  `;
 }
-// HERO INTRO ANIMATION
+
+/* ========================= */
+/* HERO INTRO */
+/* ========================= */
+
 gsap.from(".hero h1", {
-y: 80,
-opacity: 0,
-duration: 1.2,
-ease: "power3.out"
+  y: 80,
+  opacity: 0,
+  duration: 1.2,
+  ease: "power3.out"
 });
 
 gsap.from(".hero p", {
-y: 40,
-opacity: 0,
-duration: 1.2,
-delay: 0.3,
-ease: "power3.out"
+  y: 40,
+  opacity: 0,
+  duration: 1.2,
+  delay: 0.3,
+  ease: "power3.out"
 });
-
-  </script>
-  
+</script>
