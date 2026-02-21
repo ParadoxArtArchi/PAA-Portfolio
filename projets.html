@@ -5,11 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PAA — Portfolio</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 
-/* RESET */
+/* ================= RESET ================= */
+
 *{
 margin:0;
 padding:0;
@@ -18,129 +19,291 @@ box-sizing:border-box;
 
 body{
 font-family:'Manrope',sans-serif;
-background:#ffffff;
+background:#fff;
 color:#111;
 overflow-x:hidden;
 }
 
-/* HERO NOIR */
+/* ================= CINEMATIC LOADER ================= */
+
+.loader{
+position:fixed;
+inset:0;
+background:#0a0a0a;
+display:flex;
+align-items:center;
+justify-content:center;
+z-index:9999;
+overflow:hidden;
+}
+
+.loader-line{
+width:0%;
+height:1px;
+background:#fff;
+transition:width 2.8s cubic-bezier(.77,0,.18,1);
+}
+
+.loader.active .loader-line{
+width:100%;
+}
+
+/* ================= STRUCTURE LINES ================= */
+
+/* Ligne verticale centrale */
+body::before{
+content:"";
+position:fixed;
+top:0;
+left:50%;
+width:1px;
+height:100%;
+background:#111;
+opacity:0.12;
+z-index:-1;
+}
+
+/* Lignes horizontales non continues (haut/bas) */
+
+.frame-line{
+position:fixed;
+height:1px;
+background:#111;
+opacity:0.8;
+}
+
+.top-left{ top:60px; left:60px; width:120px; }
+.top-right{ top:60px; right:60px; width:120px; }
+.bottom-left{ bottom:60px; left:60px; width:120px; }
+.bottom-right{ bottom:60px; right:60px; width:120px; }
+
+/* ================= BOUTON RETOUR ================= */
+
+.back-home{
+position:fixed;
+top:40px;
+left:60px;
+font-size:11px;
+letter-spacing:4px;
+text-decoration:none;
+color:#111;
+display:flex;
+align-items:center;
+gap:12px;
+z-index:20;
+}
+
+.back-home::before{
+content:"✿";
+font-size:14px;
+transition:1s ease;
+}
+
+.back-home:hover::before{
+transform:rotate(360deg);
+}
+
+/* ================= HERO ================= */
 
 .portfolio-hero{
 height:100vh;
-background:#0a0a0a;
-color:#ffffff;
+background:#0b0b0b;
+color:#fff;
 display:flex;
-flex-direction:column;
 align-items:center;
 justify-content:center;
 text-align:center;
-padding:0 20px;
+position:relative;
 }
 
-.portfolio-hero h1{
-font-size:clamp(42px,8vw,120px);
-letter-spacing:10px;
-font-weight:700;
+.hero-inner h1{
+font-size:clamp(40px,7vw,90px);
+letter-spacing:12px;
+font-weight:600;
 }
 
-.portfolio-hero p{
+.hero-inner p{
 margin-top:30px;
-letter-spacing:3px;
-opacity:0.6;
-font-size:14px;
+letter-spacing:6px;
+font-size:12px;
+opacity:0.4;
 }
 
-/* SECTION PROJETS */
+/* ================= SECTION ================= */
 
 .projects-section{
-padding:140px 8%;
-background:#f5f5f5;
-}
-
-.projects-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-gap:70px;
+padding:250px 12%;
 max-width:1600px;
 margin:auto;
 }
 
-/* CARD */
+/* ================= PROJECT ================= */
 
-.project-card{
-display:flex;
-flex-direction:column;
+.project{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:140px;
+align-items:center;
+margin-bottom:350px;
 }
 
+/* alternance */
+
+.project:nth-child(even){
+direction:rtl;
+}
+.project:nth-child(even) .project-info{
+direction:ltr;
+}
+
+/* IMAGE */
+
 .project-image{
-height:520px;
+height:620px;
+position:relative;
 overflow:hidden;
-border-radius:18px;
+}
+
+/* Lignes internes plus fortes */
+
+.project-image::before,
+.project-image::after{
+content:"";
+position:absolute;
+background:#111;
+opacity:0.25;
+}
+
+.project-image::before{
+top:0;
+left:0;
+width:1px;
+height:100%;
+}
+
+.project-image::after{
+bottom:0;
+left:0;
+width:100%;
+height:1px;
 }
 
 .project-image img{
-width:100%;
-height:100%;
+width:120%;
+height:120%;
 object-fit:cover;
-transition:1s ease;
+position:absolute;
+top:-10%;
+left:-10%;
+transform:scale(1.15);
+transition:1.8s cubic-bezier(.77,0,.18,1);
 }
 
-.project-card:hover img{
-transform:scale(1.07);
+.project:hover .project-image img{
+transform:scale(1);
 }
+
+/* INFO */
 
 .project-info{
-margin-top:25px;
+position:relative;
+}
+
+.project-number{
+font-size:180px;
+opacity:0.03;
+position:absolute;
+top:-140px;
+left:-40px;
 }
 
 .project-info h3{
-font-size:22px;
-letter-spacing:2px;
-font-weight:600;
+font-size:28px;
+letter-spacing:6px;
+margin-bottom:25px;
 }
 
 .project-info p{
-margin-top:12px;
-font-size:14px;
+max-width:420px;
+line-height:1.9;
 opacity:0.6;
+font-size:13px;
+margin-bottom:60px;
 }
 
-/* BOUTON */
+/* ================= BOUTON EXPLOSIF ================= */
 
 .btn-view{
+position:relative;
 display:inline-block;
-margin-top:20px;
-padding:12px 28px;
-border:1px solid #111;
-font-size:12px;
-letter-spacing:2px;
 text-decoration:none;
+font-size:12px;
+letter-spacing:4px;
 color:#111;
-transition:0.4s ease;
+padding:14px 0;
+overflow:hidden;
 }
 
-.btn-view:hover{
+/* Ligne principale */
+
+.btn-view::before{
+content:"";
+position:absolute;
+left:0;
+bottom:0;
+width:100%;
+height:1px;
 background:#111;
-color:#fff;
+opacity:0.3;
 }
 
-/* REVEAL BASE */
+/* Chargement automatique hypnotique */
 
-.reveal{
-opacity:0;
-transform:translateY(80px);
+.btn-view::after{
+content:"";
+position:absolute;
+left:-100%;
+bottom:0;
+width:100%;
+height:1px;
+background:#111;
+animation:loadingLine 3.5s infinite cubic-bezier(.77,0,.18,1);
 }
 
-/* RESPONSIVE */
+@keyframes loadingLine{
+0%{ left:-100%; }
+100%{ left:100%; }
+}
 
-@media(max-width:768px){
+.btn-view span{
+position:relative;
+z-index:2;
+transition:0.6s ease;
+}
 
-.portfolio-hero h1{
-letter-spacing:6px;
+.btn-view:hover span{
+letter-spacing:10px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:1000px){
+
+.project{
+grid-template-columns:1fr;
+gap:80px;
+}
+
+.project:nth-child(even){
+direction:ltr;
 }
 
 .project-image{
-height:400px;
+height:450px;
+}
+
+.project-number{
+display:none;
 }
 
 }
@@ -149,59 +312,53 @@ height:400px;
 </head>
 <body>
 
-<!-- HERO -->
+<div class="loader">
+<div class="loader-line"></div>
+</div>
+
+<div class="frame-line top-left"></div>
+<div class="frame-line top-right"></div>
+<div class="frame-line bottom-left"></div>
+<div class="frame-line bottom-right"></div>
+
+<a href="https://paradoxartarchi.github.io/PAA-Portfolio/" class="back-home">
+RETOUR
+</a>
 
 <section class="portfolio-hero">
+<div class="hero-inner">
 <h1>PORTFOLIO</h1>
-<p>Réalisations sélectionnées — Architecture & Direction Artistique</p>
+<p>ARCHITECTURE — DIRECTION ARTISTIQUE — ESPACE</p>
+</div>
 </section>
-
-<!-- PROJETS -->
 
 <section class="projects-section">
 
-<div class="projects-grid">
-
-<!-- CARD 1 -->
-<div class="project-card reveal">
+<div class="project">
 <div class="project-image">
-<img src="https://picsum.photos/1200/1600?random=21">
+<img src="https://picsum.photos/1400/1800?random=51">
 </div>
 <div class="project-info">
+<div class="project-number">01</div>
 <h3>Villa Sculpturale</h3>
-<p>Architecture résidentielle contemporaine</p>
-<a href="projet.html" class="btn-view">Voir le projet</a>
+<p>Volumétrie pure. Tension horizontale. Béton brut et lumière rasante.</p>
+<a href="#" class="btn-view"><span>VOIR LE PROJET</span></a>
 </div>
 </div>
 
-<!-- CARD 2 -->
-<div class="project-card reveal">
+<div class="project">
 <div class="project-image">
-<img src="https://picsum.photos/1200/1600?random=22">
+<img src="https://picsum.photos/1400/1800?random=52">
 </div>
 <div class="project-info">
+<div class="project-number">02</div>
 <h3>Penthouse Urbain</h3>
-<p>Design intérieur minimaliste</p>
-<a href="projet.html" class="btn-view">Voir le projet</a>
+<p>Grille invisible et dialogue matière / transparence.</p>
+<a href="#" class="btn-view"><span>VOIR LE PROJET</span></a>
 </div>
 </div>
 
-<!-- CARD 3 -->
-<div class="project-card reveal">
-<div class="project-image">
-<img src="https://picsum.photos/1200/1600?random=23">
-</div>
-<div class="project-info">
-<h3>Showroom Expérientiel</h3>
-<p>Espace immersif & scénographie spatiale</p>
-<a href="projet.html" class="btn-view">Voir le projet</a>
-</div>
-</div>
-
-</div>
 </section>
-
-<!-- GSAP -->
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
@@ -210,34 +367,49 @@ height:400px;
 
 gsap.registerPlugin(ScrollTrigger);
 
-/* HERO ANIMATION */
+/* Loader cinematic */
 
-gsap.from(".portfolio-hero h1",{
+window.addEventListener("load",()=>{
+document.querySelector(".loader").classList.add("active");
+
+setTimeout(()=>{
+gsap.to(".loader",{
+opacity:0,
+duration:1.5,
+ease:"power3.out",
+onComplete:()=> document.querySelector(".loader").remove()
+});
+},3000);
+});
+
+/* Hero reveal */
+
+gsap.from(".hero-inner h1",{
 y:100,
 opacity:0,
-duration:1.4,
+duration:2,
 ease:"power4.out"
 });
 
-gsap.from(".portfolio-hero p",{
-y:60,
+gsap.from(".hero-inner p",{
+y:50,
 opacity:0,
-delay:0.3,
-duration:1.2,
-ease:"power3.out"
+delay:0.5,
+duration:1.6,
+ease:"power4.out"
 });
 
-/* REVEAL PROJETS */
+/* Projects reveal */
 
-gsap.utils.toArray(".reveal").forEach((el)=>{
-gsap.to(el,{
+gsap.utils.toArray(".project").forEach((el)=>{
+gsap.from(el,{
 scrollTrigger:{
 trigger:el,
 start:"top 85%"
 },
-y:0,
-opacity:1,
-duration:1.2,
+y:150,
+opacity:0,
+duration:1.8,
 ease:"power4.out"
 });
 });
