@@ -640,11 +640,93 @@ height:60vh;
 
 }
 
+/* ========================= */
+/* CINEMATIC PAGE LOADER     */
+/* ========================= */
+
+.page-loader{
+position:fixed;
+inset:0;
+background:#0a0a0a;
+z-index:9999;
+overflow:hidden;
+}
+
+.loader-curtain{
+position:absolute;
+bottom:0;
+left:0;
+width:100%;
+height:100%;
+background:#0a0a0a;
+}
+
+.loader-line-vertical{
+position:absolute;
+top:0;
+left:50%;
+width:1px;
+height:0%;
+background:#ffffff;
+transform:translateX(-50%);
+}
+
+/* ========================= */
+/* BUTTON DELAY TRANSITION   */
+/* ========================= */
+
+.btn-black{
+position:relative;
+overflow:hidden;
+cursor:pointer;
+}
+
+.btn-black::after{
+content:"";
+position:absolute;
+left:-100%;
+top:0;
+width:100%;
+height:100%;
+background:#ffffff;
+opacity:0.1;
+transition:1.2s cubic-bezier(.77,0,.18,1);
+}
+
+.btn-black.loading{
+pointer-events:none;
+}
+
+.btn-black.loading::after{
+left:100%;
+}
+
+/* Ligne de chargement bouton */
+
+.btn-black::before{
+content:"";
+position:absolute;
+bottom:0;
+left:0;
+width:0%;
+height:2px;
+background:#fff;
+transition:1.5s cubic-bezier(.77,0,.18,1);
+}
+
+.btn-black.loading::before{
+width:100%;
+}  
+  
 
 </style>
 </head>
 <body>
   
+  <div class="page-loader">
+  <div class="loader-curtain"></div>
+  <div class="loader-line-vertical"></div>
+</div>
 
 <header>
   <div class="container header-inner">
@@ -921,5 +1003,58 @@ gsap.from(".hero p",{
   delay: 0.3,
   ease: "power3.out"
 });
+  
+/* ========================= */
+/* PAGE ENTRY CINEMATIC      */
+/* ========================= */
+
+window.addEventListener("load",()=>{
+
+gsap.to(".loader-line-vertical",{
+height:"100%",
+duration:1.8,
+ease:"power4.out"
+});
+
+gsap.to(".loader-curtain",{
+height:0,
+duration:2.2,
+delay:0.8,
+ease:"power4.inOut",
+onComplete:()=>{
+gsap.to(".page-loader",{opacity:0,duration:0.6,onComplete:()=>{
+document.querySelector(".page-loader").remove();
+}});
+}
+});
+
+});
+
+/* ========================= */
+/* BUTTON FORCED TRANSITION  */
+/* ========================= */
+
+document.querySelectorAll(".btn-black").forEach(btn=>{
+btn.addEventListener("click",function(e){
+
+if(this.getAttribute("href") && this.getAttribute("href") !== "#"){
+e.preventDefault();
+
+let link = this.getAttribute("href");
+this.classList.add("loading");
+
+setTimeout(()=>{
+gsap.to("body",{
+opacity:0,
+duration:1.2,
+ease:"power3.inOut",
+onComplete:()=> window.location.href = link
+});
+},1500);
+
+}
+
+});
+});  
 
   </script>
