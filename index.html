@@ -1107,4 +1107,122 @@ function closePopup(){
     opacity: 0,
     duration: 0.6,
     ease: "power4.in",
-    onComplete: () => popup.classList.remove("acti
+    onComplete: () => popup.classList.remove("active")
+  });
+}
+  
+/* ========================= */
+/* HERO CINEMATIC REVEAL     */
+/* ========================= */
+
+gsap.from(".hero",{
+  y:200,
+  opacity:0,
+  duration:1.8,
+  ease:"power4.out"
+});
+
+gsap.from(".hero h1",{
+  y:120,
+  opacity:0,
+  duration:1.6,
+  delay:0.4,
+  ease:"power4.out"
+});
+
+gsap.from(".hero p",{
+  y:60,
+  opacity:0,
+  duration:1.6,
+  delay:0.7,
+  ease:"power4.out"
+});
+  
+/* ========================= */
+/* PAGE ENTRY CINEMATIC      */
+/* ========================= */
+
+window.addEventListener("load",()=>{
+
+gsap.to(".loader-line-vertical",{
+height:"100%",
+duration:1.8,
+ease:"power4.out"
+});
+
+gsap.to(".loader-curtain",{
+height:0,
+duration:2.2,
+delay:0.8,
+ease:"power4.inOut",
+onComplete:()=>{
+gsap.to(".page-loader",{opacity:0,duration:0.6,onComplete:()=>{
+document.querySelector(".page-loader").remove();
+}});
+}
+});
+
+});
+
+/* ========================= */
+/* BUTTON FORCED TRANSITION  */
+/* ========================= */
+
+document.querySelectorAll(".btn-black").forEach(btn=>{
+btn.addEventListener("click",function(e){
+
+if(this.getAttribute("href") && this.getAttribute("href") !== "#"){
+e.preventDefault();
+
+let link = this.getAttribute("href");
+this.classList.add("loading");
+
+setTimeout(()=>{
+gsap.to("body",{
+opacity:0,
+duration:1.2,
+ease:"power3.inOut",
+onComplete:()=> window.location.href = link
+});
+},1500);
+
+}
+
+});
+});  
+
+/* ========================= */
+/* SCROLL REVEAL CINEMATIC   */
+/* ========================= */
+
+gsap.utils.toArray(".section, .service-card, .portfolio-image").forEach((el)=>{
+
+gsap.from(el,{
+scrollTrigger:{
+trigger:el,
+start:"top 90%",
+toggleActions:"play none none reverse"
+},
+y:140,
+opacity:0,
+duration:1.8,
+ease:"power4.out"
+});
+
+});  
+  
+/* HERO REVEAL ON SCROLL BACK */
+ScrollTrigger.create({
+trigger: ".hero",
+start: "top top",
+onEnterBack: () => {
+gsap.fromTo(".hero",
+{ y:150, opacity:0 },
+{ y:0, opacity:1, duration:1.5, ease:"power4.out" }
+);
+}
+});  
+  
+  
+  </script>
+  
