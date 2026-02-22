@@ -164,6 +164,31 @@ position:relative;
 overflow:hidden;
 }
 
+/* Curseur custom */
+
+.project-image{
+cursor:none;
+}
+
+.custom-cursor{
+position:fixed;
+width:80px;
+height:80px;
+border:1px solid #fff;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:10px;
+letter-spacing:2px;
+pointer-events:none;
+z-index:9999;
+opacity:0;
+transform:translate(-50%,-50%);
+transition:opacity 0.3s ease, transform 0.2s ease;
+mix-blend-mode:difference;
+}  
+  
 /* Lignes internes plus fortes */
 
 .project-image::before,
@@ -308,10 +333,61 @@ display:none;
 
 }
 
+/* ================= DARK MODE GLOBAL ================= */
+
+body{
+transition:background 0.6s ease, color 0.6s ease;
+}
+
+/* Texte général */
+body.dark-mode{
+color:#ffffff;
+}
+
+/* Lignes structure */
+body.dark-mode::before{
+background:#ffffff;
+opacity:0.08;
+}
+
+body.dark-mode .frame-line{
+background:#ffffff;
+opacity:0.4;
+}
+
+/* Bouton retour */
+body.dark-mode .back-home{
+color:#ffffff;
+}
+
+/* Textes projets */
+body.dark-mode .project-info h3,
+body.dark-mode .project-info p{
+color:#ffffff;
+}
+
+/* Numéro géant */
+body.dark-mode .project-number{
+color:#ffffff;
+opacity:0.05;
+}
+
+/* Bouton voir projet */
+body.dark-mode .btn-view{
+color:#ffffff;
+}
+
+body.dark-mode .btn-view::before,
+body.dark-mode .btn-view::after{
+background:#ffffff;
+}  
+  
 </style>
 </head>
 <body>
 
+  <div class="custom-cursor">VIEW</div>
+  
 <div class="loader">
 <div class="loader-line"></div>
 </div>
@@ -334,7 +410,7 @@ RETOUR
 
 <section class="projects-section">
 
-<div class="project">
+<div class="project" data-bg="#0b0b0b">
 <div class="project-image">
 <img src="https://picsum.photos/1400/1800?random=51">
 </div>
@@ -346,7 +422,7 @@ RETOUR
 </div>
 </div>
 
-<div class="project">
+<div class="project" data-bg="#111111">
 <div class="project-image">
 <img src="https://picsum.photos/1400/1800?random=52">
 </div>
@@ -354,6 +430,54 @@ RETOUR
 <div class="project-number">02</div>
 <h3>Penthouse Urbain</h3>
 <p>Grille invisible et dialogue matière / transparence.</p>
+<a href="#" class="btn-view"><span>VOIR LE PROJET</span></a>
+</div>
+</div>
+
+<div class="project" data-bg="#151515">
+<div class="project-image">
+<img src="https://picsum.photos/1400/1800?random=53">
+</div>
+<div class="project-info">
+<div class="project-number">03</div>
+<h3>Galerie Minimaliste</h3>
+<p>Lumière verticale, espace silencieux et brutalité maîtrisée.</p>
+<a href="#" class="btn-view"><span>VOIR LE PROJET</span></a>
+</div>
+</div>
+
+<div class="project" data-bg="#1b1b1b">
+<div class="project-image">
+<img src="https://picsum.photos/1400/1800?random=54">
+</div>
+<div class="project-info">
+<div class="project-number">04</div>
+<h3>Résidence Horizon</h3>
+<p>Perspective infinie, lignes suspendues, luxe discret.</p>
+<a href="#" class="btn-view"><span>VOIR LE PROJET</span></a>
+</div>
+</div>
+
+<div class="project" data-bg="#101010">
+<div class="project-image">
+<img src="https://picsum.photos/1400/1800?random=55">
+</div>
+<div class="project-info">
+<div class="project-number">05</div>
+<h3>Maison Monolithe</h3>
+<p>Masse compacte, ombres profondes, brutalité élégante.</p>
+<a href="#" class="btn-view"><span>VOIR LE PROJET</span></a>
+</div>
+</div>
+
+<div class="project" data-bg="#0f0f0f">
+<div class="project-image">
+<img src="https://picsum.photos/1400/1800?random=56">
+</div>
+<div class="project-info">
+<div class="project-number">06</div>
+<h3>Loft Signature</h3>
+<p>Dialogue béton / verre dans une tension contemporaine.</p>
 <a href="#" class="btn-view"><span>VOIR LE PROJET</span></a>
 </div>
 </div>
@@ -413,8 +537,50 @@ duration:1.8,
 ease:"power4.out"
 });
 });
+  
+/* Background + texte dynamique propre */
+
+ScrollTrigger.create({
+trigger: ".projects-section",
+start: "top center",
+onEnter: () => {
+gsap.to("body", {
+backgroundColor: "#0b0b0b",
+duration: 1,
+ease: "power3.out"
+});
+document.body.classList.add("dark-mode");
+},
+onLeaveBack: () => {
+gsap.to("body", {
+backgroundColor: "#ffffff",
+duration: 1,
+ease: "power3.out"
+});
+document.body.classList.remove("dark-mode");
+}
+});
+  
+/* Curseur interaction */
+
+const cursor = document.querySelector(".custom-cursor");
+const images = document.querySelectorAll(".project-image");
+
+images.forEach(el=>{
+el.addEventListener("mouseenter",()=>{
+cursor.style.opacity = "1";
+});
+el.addEventListener("mouseleave",()=>{
+cursor.style.opacity = "0";
+});
+});
+
+window.addEventListener("mousemove",(e)=>{
+cursor.style.left = e.clientX + "px";
+cursor.style.top = e.clientY + "px";
+});  
 
 </script>
 
 </body>
-</html>
+  </html>
